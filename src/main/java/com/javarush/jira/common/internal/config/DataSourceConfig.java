@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
-
 import javax.sql.DataSource;
 
 @Configuration
@@ -20,17 +19,6 @@ public class DataSourceConfig {
                 .username(System.getenv("DB_USERNAME"))
                 .password(System.getenv("DB_PASSWORD"))
                 .driverClassName("org.postgresql.Driver")
-                .build();
-    }
-
-    @Bean
-    @Profile("test")
-    public DataSource h2DataSource() {
-        return DataSourceBuilder.create()
-                .url("jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE")
-                .username("sa")
-                .password("")
-                .driverClassName("org.h2.Driver")
                 .build();
     }
 }

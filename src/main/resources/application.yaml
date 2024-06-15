@@ -11,7 +11,7 @@ spring:
   config:
     import: application-secrets.yaml
   init:
-    mode: never
+    mode: always
   jpa:
     show-sql: true
     open-in-view: false

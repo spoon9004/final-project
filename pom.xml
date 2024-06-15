@@ -16,8 +16,10 @@
     <description>Mini-JIRA from JavaRush</description>
 
     <properties>
-        <java.version>11</java.version>
+<!--        <java.version>16</java.version>-->
         <springdoc.version>2.0.2</springdoc.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <mapstruct.version>1.5.3.Final</mapstruct.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

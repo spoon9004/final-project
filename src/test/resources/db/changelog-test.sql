@@ -107,7 +107,7 @@ create table CONTACT
 (
     ID    bigint       not null,
     CODE  varchar(32)  not null,
-    VALUE varchar(256) not null,
+    "VALUE" varchar(256) not null,
     primary key (ID, CODE),
     constraint FK_CONTACT_PROFILE foreign key (ID) references PROFILE (ID) on delete cascade
     );
@@ -280,9 +280,14 @@ values ('todo', 'ToDo', 3, 'in_progress,canceled'),
 
 --changeset gkislin:users_add_on_delete_cascade
 
+alter table ACTIVITY drop constraint if exists FK_ACTIVITY_USERS;
+
+-- Добавление нового ограничения с каскадным удалением
 alter table ACTIVITY
-    drop constraint FK_ACTIVITY_USERS,
-    add constraint FK_ACTIVITY_USERS foreign key (AUTHOR_ID) references USERS (ID) on delete cascade;
+    add constraint FK_ACTIVITY_USERS
+    foreign key (AUTHOR_ID)
+    references USERS (ID)
+    on delete cascade;
 
 alter table USER_BELONG
     drop constraint FK_USER_BELONG,
