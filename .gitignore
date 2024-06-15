@@ -5,6 +5,6 @@ target
 logs
 attachments
 *.patch
-/src/resources/application-secrets.yaml
+/src/main/resources/application-secrets.yaml
 
 
