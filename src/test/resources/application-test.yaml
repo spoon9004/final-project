@@ -1,8 +1,10 @@
 spring.cache.type: none
 spring:
+  config:
+    import: application-secrets.yaml
   init:
     mode: always
   datasource:
     url: jdbc:postgresql://localhost:5434/jira-test
-    username: jira
-    password: JiraRush
+    username: ${db.username}
+    password: ${db.password}
