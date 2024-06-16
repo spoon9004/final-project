@@ -9,11 +9,11 @@ DELETE FROM PROJECT;
 DELETE FROM USERS;
 
 -- Сбрасываем последовательности для таблиц, использующих их
-ALTER SEQUENCE ACTIVITY_ID_SEQ RESTART WITH 1;
-ALTER SEQUENCE TASK_ID_SEQ RESTART WITH 1;
-ALTER SEQUENCE SPRINT_ID_SEQ RESTART WITH 1;
-ALTER SEQUENCE PROJECT_ID_SEQ RESTART WITH 1;
-ALTER SEQUENCE USERS_ID_SEQ RESTART WITH 1;
+CREATE SEQUENCE IF NOT EXISTS ACTIVITY_ID_SEQ RESTART WITH 1;
+CREATE SEQUENCE IF NOT EXISTS TASK_ID_SEQ RESTART WITH 1;
+CREATE SEQUENCE IF NOT EXISTS SPRINT_ID_SEQ RESTART WITH 1;
+CREATE SEQUENCE IF NOT EXISTS PROJECT_ID_SEQ RESTART WITH 1;
+CREATE SEQUENCE IF NOT EXISTS USERS_ID_SEQ RESTART WITH 1;
 
 -- Вставляем данные
 
@@ -25,10 +25,13 @@ VALUES (1, 'user@gmail.com', '{noop}password', 'userFirstName', 'userLastName', 
        (4, 'manager@gmail.com', '{noop}manager', 'managerFirstName', 'managerLastName', 'managerDisplayName');
 
 -- Вставляем роли пользователей
+-- 0 DEV
+-- 1 ADMIN
+-- 2 MANAGER
 INSERT INTO USER_ROLE (USER_ID, ROLE)
-VALUES (2, 'ADMIN'),
-       (3, 'MANAGER'),
-       (4, 'DEV');
+VALUES (2, 1),
+       (3, 2),
+       (4, 0);
 
 -- Вставляем профили
 INSERT INTO PROFILE (ID, LAST_FAILED_LOGIN, LAST_LOGIN, MAIL_NOTIFICATIONS)
@@ -36,7 +39,7 @@ VALUES (1, NULL, NULL, 49),
        (2, NULL, NULL, 14);
 
 -- Вставляем контактные данные
-INSERT INTO CONTACT (ID, CODE, VALUE)
+INSERT INTO CONTACT (ID, CODE, "VALUE")
 VALUES (1, 'skype', 'userSkype'),
        (1, 'mobile', '+01234567890'),
        (1, 'website', 'user.com'),
