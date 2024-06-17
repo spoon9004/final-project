@@ -17,9 +17,11 @@ spring:
     username: sa
     password:
   liquibase:
-    change-log: classpath:db/changelog-test.sql
+    changeLog: "classpath:db/changelog-test.sql"
   jpa:
-    ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
+logging:
+  level:
+    root: DEBUG

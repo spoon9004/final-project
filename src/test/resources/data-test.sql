@@ -1,4 +1,4 @@
----------  users ----------------------
+-- Удаляем все записи из таблиц, чтобы избежать дублирования при повторных запусках
 delete from USER_ROLE;
 delete from CONTACT;
 delete from PROFILE;
@@ -7,11 +7,12 @@ delete from TASK;
 delete from SPRINT;
 delete from PROJECT;
 delete from USERS;
-alter sequence ACTIVITY_ID_SEQ restart with 1;
-alter sequence TASK_ID_SEQ restart with 1;
-alter sequence SPRINT_ID_SEQ restart with 1;
-alter sequence PROJECT_ID_SEQ restart with 1;
-alter sequence USERS_ID_SEQ restart with 1;
+-- Сбрасываем последовательности для таблиц, использующих их
+CREATE SEQUENCE IF NOT EXISTS ACTIVITY_ID_SEQ RESTART WITH 1;
+CREATE SEQUENCE IF NOT EXISTS TASK_ID_SEQ RESTART WITH 1;
+CREATE SEQUENCE IF NOT EXISTS SPRINT_ID_SEQ RESTART WITH 1;
+CREATE SEQUENCE IF NOT EXISTS PROJECT_ID_SEQ RESTART WITH 1;
+CREATE SEQUENCE IF NOT EXISTS USERS_ID_SEQ RESTART WITH 1;
 
 insert into USERS (EMAIL, PASSWORD, FIRST_NAME, LAST_NAME, DISPLAY_NAME)
 values ('user@gmail.com', '{noop}password', 'userFirstName', 'userLastName', 'userDisplayName'),
@@ -25,6 +26,7 @@ values ('user@gmail.com', '{noop}password', 'userFirstName', 'userLastName', 'us
 
 insert into USER_ROLE (USER_ID, ROLE)
 values (1, 0),
+       (2, 0),
        (2, 1),
        (4, 2);
 
@@ -32,7 +34,7 @@ insert into PROFILE (ID, LAST_FAILED_LOGIN, LAST_LOGIN, MAIL_NOTIFICATIONS)
 values (1, null, null, 49),
        (2, null, null, 14);
 
-insert into CONTACT (ID, CODE, VALUE)
+insert into CONTACT (ID, CODE, "VALUE")
 values (1, 'skype', 'userSkype'),
        (1, 'mobile', '+01234567890'),
        (1, 'website', 'user.com'),

@@ -1,5 +1,9 @@
 package com.javarush.jira.common.internal.config;
 
+import liquibase.Liquibase;
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.resource.ClassLoaderResourceAccessor;
+import lombok.SneakyThrows;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,12 +30,18 @@ public class DataSourceConfig {
     @Profile("test")
     @Bean
     public DataSource h2DataSource() {
-        return DataSourceBuilder.create()
+        DataSource dataSource = DataSourceBuilder.create()
                 .url("jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE")
                 .username("sa")
                 .password("")
                 .driverClassName("org.h2.Driver")
                 .build();
+//        Liquibase liquibase = new Liquibase("/db/changelog-test.sql", new ClassLoaderResourceAccessor(), new JdbcConnection(dataSource.getConnection()));
+//        // Запуск Liquibase с использованием H2 DataSource
+
+        return dataSource;
     }
+
+
 
 }

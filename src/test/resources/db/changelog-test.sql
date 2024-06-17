@@ -151,8 +151,6 @@ CREATE TABLE USER_BELONG (
     CONSTRAINT FK_USER_BELONG FOREIGN KEY (USER_ID) REFERENCES USERS(ID)
 );
 
-CREATE UNIQUE INDEX UK_USER_BELONG ON USER_BELONG (OBJECT_ID, OBJECT_TYPE, USER_ID, USER_TYPE_CODE);
-CREATE INDEX IX_USER_BELONG_USER_ID ON USER_BELONG (USER_ID);
 
 CREATE TABLE ATTACHMENT (
     ID BIGSERIAL PRIMARY KEY,
@@ -284,4 +282,3 @@ VALUES ('todo', 'ToDo', 3, 'in_progress,canceled|'),
        ('test', 'Test', 3, 'done,in_progress,canceled|task_tester'),
        ('done', 'Done', 3, 'canceled|'),
        ('canceled', 'Canceled', 3, null);
-
